@@ -1,7 +1,7 @@
 name: Actualizar JSON automáticamente
 
 permissions:
-  contents: write  # 🔑 permite commits/push
+  contents: write  # permite commit y push
 
 on:
   push:
@@ -11,7 +11,6 @@ on:
 jobs:
   update-json:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -26,10 +25,10 @@ jobs:
       - name: Instalar dependencias
         run: npm ci || npm install
 
-      - name: Actualizar JSON
+      - name: Ejecutar script para actualizar JSON
         run: npm run update-json
 
-      - name: Commit y push
+      - name: Commit y push automático
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
