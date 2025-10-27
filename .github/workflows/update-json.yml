@@ -1,0 +1,35 @@
+name: Actualizar JSON automáticamente
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-json:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🛎️ Checkout del repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: ⚙️ Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 📦 Instalar dependencias
+        run: npm ci || npm install
+
+      - name: 🧠 Ejecutar script para actualizar JSON
+        run: npm run update-json
+
+      - name: 📤 Commit y push de los cambios
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data.json
+          git commit -m "🤖 Actualización automática del JSON"
+          git push

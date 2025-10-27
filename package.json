@@ -1,0 +1,11 @@
+{
+  "name": "node-json-actions",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node index.js",
+    "update-json": "node scripts/update-json.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0"
+  }
+}
